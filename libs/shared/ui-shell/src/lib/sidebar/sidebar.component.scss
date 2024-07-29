@@ -1,0 +1,20 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  border: 0;
+  border-radius: 0;
+  width: 200px;
+  background: var(--mat-toolbar-container-text-color);
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.app-container {
+  padding: 20px;
+}

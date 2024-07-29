@@ -1,0 +1,118 @@
+{
+  "name": "cisa-visualizer-client",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "app",
+  "sourceRoot": "apps/cisa-visualizer-client/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "options": {
+        "outputPath": "dist/apps/cisa-visualizer-client",
+        "index": "apps/cisa-visualizer-client/src/index.html",
+        "browser": "apps/cisa-visualizer-client/src/main.ts",
+        "polyfills": [
+          "zone.js"
+        ],
+        "tsConfig": "apps/cisa-visualizer-client/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/cisa-visualizer-client/public"
+          }
+        ],
+        "styles": [
+          "@angular/material/prebuilt-themes/cyan-orange.css",
+          "node_modules/@swimlane/ngx-datatable/index.scss",
+          "node_modules/@swimlane/ngx-datatable/themes/material.scss",
+          "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+          "apps/cisa-visualizer-client/src/styles.scss"
+        ],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "surge": {
+          "buildTarget": "cisa-visualizer-client:build:production"
+        },
+        "production": {
+          "buildTarget": "cisa-visualizer-client:build:production"
+        },
+        "development": {
+          "buildTarget": "cisa-visualizer-client:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/cisa-visualizer-client/proxy.conf.json"
+      }
+    },
+    "serve-width-server": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run cisa-visualizer-client:serve",
+          "nx run cisa-visualizer-server:serve"
+        ],
+        "parallel": true
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "cisa-visualizer-client:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "apps/cisa-visualizer-client/jest.config.ts"
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "cisa-visualizer-client:build",
+        "port": 4200,
+        "staticFilePath": "dist/apps/cisa-visualizer-client/browser",
+        "spa": true
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "name": "cisa-visualizer-client-e2e",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/cisa-visualizer-client-e2e/src",
+  "tags": [],
+  "implicitDependencies": ["cisa-visualizer-client"],
+  "// targets": "to see all targets run: nx show project cisa-visualizer-client-e2e --web",
+  "targets": {}
+}

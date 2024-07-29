@@ -14,7 +14,18 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@cisa-visualizer/feature-charts": ["libs/feature-charts/src/index.ts"],
+      "@cisa-visualizer/feature-home": ["libs/feature-home/src/index.ts"],
+      "@cisa-visualizer/feature-table": ["libs/feature-table/src/index.ts"],
+      "@cisa-visualizer/shared/data-cisa": [
+        "libs/shared/data-cisa/src/index.ts"
+      ],
+      "@cisa-visualizer/shared/ui-shell": ["libs/shared/ui-shell/src/index.ts"],
+      "@cisa-visualizer/shared/util-common": [
+        "libs/shared/util-common/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

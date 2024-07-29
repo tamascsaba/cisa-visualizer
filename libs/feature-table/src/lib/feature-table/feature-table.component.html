@@ -1,0 +1,12 @@
+<h3>Vulnerability table</h3>
+<table mat-table [dataSource]="dataSource" >
+  <mat-text-column name="cveID" headerText="ID." ></mat-text-column>
+  <mat-text-column name="vendorProject" headerText="Vendor Project"></mat-text-column>
+  <mat-text-column name="dateAdded" headerText="Date added"></mat-text-column>
+  <mat-text-column name="shortDescription" headerText="Short description"></mat-text-column>
+  <mat-text-column name="product"></mat-text-column>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[10, 20, 40, 60, 80]"></mat-paginator>

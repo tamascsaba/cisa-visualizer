@@ -1,0 +1,60 @@
+{
+  "name": "cisa-visualizer-server",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/cisa-visualizer-server/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nrwl/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "main": "apps/cisa-visualizer-server/src/main.ts",
+        "outputPath": "dist/apps/cisa-visualizer-server",
+        "outputFileName": "main.js",
+        "tsConfig": "apps/cisa-visualizer-server/tsconfig.app.json",
+        "project": "apps/cisa-visualizer-server/package.json",
+        "assets": [],
+        "platform": "node",
+        "format": ["cjs"]
+      },
+      "configurations": {
+        "development": {
+          "minify": false
+        },
+        "production": {
+          "minify": true
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "cisa-visualizer-server:build"
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "cisa-visualizer-server:build:production"
+        }
+      }
+    },
+    "serve-width-client": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "nx run cisa-visualizer-server:serve",
+          "nx run cisa-visualizer-client:serve"
+        ],
+        "parallel": true
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/cisa-visualizer-server/jest.config.ts"
+      }
+    }
+  }
+}

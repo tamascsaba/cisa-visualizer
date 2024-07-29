@@ -1,0 +1,27 @@
+{
+  "name": "@cisa-visualizer/shared/ui-shell",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "library",
+  "sourceRoot": "libs/shared/ui-shell/src",
+  "prefix": "shell",
+  "tags": ["domain:shared", "type:ui"],
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/shared/ui-shell"],
+      "options": {
+        "jestConfig": "libs/shared/ui-shell/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/shared/ui-shell/**/*.ts",
+          "libs/shared/ui-shell/**/*.html"
+        ]
+      }
+    }
+  }
+}
