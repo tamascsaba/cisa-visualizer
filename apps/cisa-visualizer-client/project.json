@@ -17,6 +17,9 @@
         "browser": "apps/cisa-visualizer-client/src/main.ts",
         "tsConfig": "apps/cisa-visualizer-client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
+        "allowedCommonJsDependencies": [
+          "rfdc"
+        ],
         "assets": [
           {
             "glob": "**/*",
@@ -37,7 +40,7 @@
           "budgets": [
             {
               "type": "initial",
-              "maximumWarning": "500kb",
+              "maximumWarning": "550kb",
               "maximumError": "1mb"
             },
             {
