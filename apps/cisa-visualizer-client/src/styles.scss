@@ -17,10 +17,12 @@ $theme: mat.define-theme((
 html {
   --mat-toolbar-container-background-color: #fe5b17;
   --mat-toolbar-container-text-color: #222;
+  --mat-toolbar-title-text-weight: 600;
 }
 
 body {
   background: var(--mat-app-background-color);
+  font-size: 18px;
   width: 100%;
   height: 100%;
   padding: 0;

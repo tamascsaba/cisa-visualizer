@@ -15,9 +15,6 @@
         "outputPath": "dist/apps/cisa-visualizer-client",
         "index": "apps/cisa-visualizer-client/src/index.html",
         "browser": "apps/cisa-visualizer-client/src/main.ts",
-        "polyfills": [
-          "zone.js"
-        ],
         "tsConfig": "apps/cisa-visualizer-client/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [

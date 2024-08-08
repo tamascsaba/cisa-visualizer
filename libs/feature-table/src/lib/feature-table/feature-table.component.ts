@@ -1,4 +1,4 @@
-import { Component, signal, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CisaVulnerabilitiesService, CisaVulnerability } from '@cisa-visualizer/shared/data-cisa';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -14,23 +14,19 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrl: 'feature-table.component.scss'
 })
 export class FeatureTableComponent implements AfterViewInit {
-  private loading = signal(true);
   public dataSource = new MatTableDataSource<CisaVulnerability>();
   public displayedColumns: string[] = ['cveID', 'vendorProject', 'product', 'dateAdded', 'shortDescription'];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatPaginator) protected paginator!: MatPaginator;
 
-  constructor(private readonly cisa: CisaVulnerabilitiesService) {
+  constructor(private readonly cisaVulnerabilitiesService: CisaVulnerabilitiesService) {
   }
 
   ngAfterViewInit() {
-    this.cisa.getVulnerabilities().subscribe(vulnerabilities => {
-      this.dataSource.data = vulnerabilities;
-      this.dataSource.paginator = this.paginator;
+    this.cisaVulnerabilitiesService.getVulnerabilities()
+      .subscribe(vulnerabilities => {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.data = vulnerabilities;
     });
-  }
-
-  protected isLoading() {
-    return this.loading();
   }
 }

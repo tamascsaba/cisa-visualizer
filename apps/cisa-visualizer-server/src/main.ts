@@ -21,21 +21,19 @@ app.get('/api/cisa/', (req, res) => {
 });
 
 app.get('/api/cisa/vulnerabilities', (req, res) => {
-  https.get(CISA_URL, (response) => {
-    let data = '';
+  https.get(CISA_URL, (externalRes) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.setHeader('Transfer-Encoding', 'chunked');
 
-    response.on('data', (chunk) => data += chunk);
+    // stream the cisa response.
+    // it has minimal memory footprint 🚀
+    externalRes.pipe(res);
 
-    response.on('end', () => {
-      try {
-        const jsonData = JSON.parse(data);
-        res.json(jsonData?.vulnerabilities);
-      } catch (error) {
-        res.status(500).send('Error parse CISA json');
-      }
+    externalRes.on('error', (error) => {
+      res.status(500).send('Error fetching the JSON data');
     });
-  }).on('error', () => {
-    res.status(500).send('Error CISA data is not available');
+  }).on('error', (error) => {
+    res.status(500).send('Error making the request');
   });
 });
 

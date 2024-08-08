@@ -3,10 +3,12 @@ import { CisaVulnerabilitiesService, CisaVulnerability } from '@cisa-visualizer/
 import { groupBy, map, mergeMap, reduce, toArray } from 'rxjs/operators';
 import { from } from 'rxjs';
 
+const PIE_CHART_LIMIT = 10;
+
 @Injectable({
   providedIn: 'root'
 })
-export class ChartsService {
+export class ChartService {
   constructor(private readonly cisa: CisaVulnerabilitiesService) {
   }
 
@@ -22,7 +24,7 @@ export class ChartsService {
         }))
       )),
       toArray(),
-      map(arr => arr.sort((a, b) => b.value - a.value).slice(0, 10))
+      map(arr => arr.sort((a, b) => b.value - a.value).slice(0, PIE_CHART_LIMIT))
     );
   }
 
@@ -32,14 +34,11 @@ export class ChartsService {
         const monthlyCounts = vulnerabilities.reduce((acc, curr) => {
           const date = new Date(curr.dateAdded);
           const yearMonth = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-          if (!acc[yearMonth]) {
-            acc[yearMonth] = 0;
-          }
+          if (!acc[yearMonth]) acc[yearMonth] = 0;
           acc[yearMonth]++;
           return acc;
         }, {} as { [key: string]: number });
 
-        // Sort the keys (year-month) to ensure the data is in chronological order
         const sortedKeys = Object.keys(monthlyCounts).sort();
         return sortedKeys.map(key => ({ name: key, value: monthlyCounts[key] }));
       })

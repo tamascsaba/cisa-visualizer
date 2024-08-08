@@ -1,11 +1,17 @@
 <h3>Pie chart with the top 10 vendor vulnerability count</h3>
-<div *ngIf="isLoading()">Loading...</div>
-<div *ngIf="!isLoading()">
+<div>
+@if(isPieChartLoading()) {
+  Loading....
+} @else {
   <ngx-charts-pie-chart [results]="pieChartData()" [legend]="true"></ngx-charts-pie-chart>
+}
 </div>
 
 <h3>Bar chart to show total number of vulnerabilities</h3>
-<div *ngIf="isLoading()">Loading...</div>
-<div *ngIf="!isLoading()">
-  <ngx-charts-bar-vertical [results]="barChartData()" [legend]="true"></ngx-charts-bar-vertical>
+<div>
+  @if(isBarChartLoading()) {
+    Loading....
+  } @else {
+    <ngx-charts-bar-vertical [results]="barChartData()" [legend]="true"></ngx-charts-bar-vertical>
+  }
 </div>
