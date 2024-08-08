@@ -2,7 +2,10 @@
   "name": "@cisa-visualizer/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev": "nx run cisa-visualizer-client:serve-width-server",
+    "test": "nx run-many --all --target=test"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.1.0",
