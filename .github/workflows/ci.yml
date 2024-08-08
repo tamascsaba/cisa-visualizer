@@ -26,4 +26,4 @@ jobs:
       - run: npm ci
       - uses: nrwl/nx-set-shas@v4
 
-      - run: nx run-many --all --target=build,lint,test,e2e
+      - run: npx nx run-many --all --target=build,lint,test,e2e
